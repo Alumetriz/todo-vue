@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+body {
+  font-family: Inter, Roboto, Oxygen, Fira Sans, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  color: #2c3e50;
+  background: #2c3e50;
+}
+
+.app-container {
+  margin-top: 25px;
+}
+
+.wrapper {
+  background-color: white;
+  border-radius: 15px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.header__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 35px;
+}
+
+.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 25px;
+}
+
+.btn {
+  color: #42b983;
+  position: relative;
+  place-content: center;
+  place-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  border: 1px solid #42b983;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-right: 10px;
+  padding: 0.5rem 1.5rem;
+  white-space: nowrap;
+  font-weight: 700;
+  outline: none;
+  background: #fff;
+  -webkit-transition: all 0.22s;
+  transition: all 0.22s;
+}
+
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.btn:active {
+  -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+          box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.btn.primary {
+  background: #42b983;
+  color: #fff;
+}
+
+.btn.danger {
+  background: #e53935;
+  color: #fff;
+  border-color: #e53935;
+}
+
+.form {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.form input {
+  margin: 0;
+  outline: none;
+  border: 2px solid #ccc;
+  display: block;
+  width: 100%;
+  color: #2c3e50;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+.form label {
+  display: block;
+  margin: 0 0 0.3rem 0.3rem;
+  font-weight: 500;
+}
+
+.form input:active,
+.form input:focus {
+  -webkit-transition: border 0.22s;
+  transition: border 0.22s;
+  border: 2px solid #42b983;
+}
+
+.tasks-title {
+  margin: 40px 0;
+}
+
+.tasks__list,
+.completed-tasks__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 25px;
+  padding: 40px;
+  max-height: 400px;
+  overflow-y: scroll;
+  border-radius: 15px;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
