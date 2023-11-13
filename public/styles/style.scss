@@ -36,7 +36,9 @@ body {
   flex-direction: column;
   gap: 35px;
 }
-
+.warning {
+  color: darkred;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -82,7 +84,11 @@ body {
   color: #fff;
   border-color: #e53935;
 }
-
+.btn.blue {
+  background: darkblue;
+  color: #fff;
+  border-color: darkblue;
+}
 .form {
   position: relative;
   margin-bottom: 0.5rem;

@@ -15,117 +15,49 @@
     <div class="wrapper">
         <header class="header">
             <div class="header__wrapper">
-                <h1 class="title">To-Do List</h1>
+                <h1 :class="{'title': inputValue.length <= 10, 'warning': inputValue.length > 10}">{{ title }}</h1>
 
                 <form class="form">
-                    <input type="text">
-                    <button class="btn" type="submit">Добавить</button>
+                    <input type="text" :placeholder="placeHolder" v-model="inputValue">
+                    <button class="btn" type="submit" @click.prevent="addTaskToDo(inputValue)">Добавить</button>
                 </form>
             </div>
         </header>
 
         <main class="main">
             <section class="tasks__section">
-                <h1 class="tasks-title">Tasks To-Do</h1>
-                <ul class="tasks__list">
-                    <li class="card">
-                        Task 4444
+                <h1 class="task-title">{{ tasksToDoTitle }}</h1>
+                <ul class="tasks__list" v-if="tasksToDo.length !== 0">
+                    <li class="card" v-for="(task, index) in tasksToDo">
+                        <span class="task-info">({{ index }}){{ task }}</span>
                         <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <div>
-                            <button class="btn danger">Удалить</button>
-                            <button class="btn primary">Выполнить</button>
+                            <button class="btn danger" @click="deleteTask(tasksToDo, index)">Удалить</button>
+                            <button class="btn primary" @click="completeTask(task, index)">Выполнить</button>
+                            <button class="btn blue" @click="editTask(task, index)">
+                                {{ editingTaskIndex === index ? 'Применить' : 'Редактировать' }}
+                            </button>
                         </div>
                     </li>
                 </ul>
+                <p v-else>Нет активных заданий.</p>
             </section>
 
             <section class="completed-tasks__section">
-                <h1 class="tasks-title">Completed Tasks</h1>
-                <ul class="completed-tasks__list">
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
-                    </li>
-                    <li class="card">
-                        Task 4444
-                        <button class="btn danger">Удалить</button>
+                <h1 class="tasks-title">{{ completedTasksTitle }}</h1>
+                <ul class="completed-tasks__list" v-if="completedTasks.length != 0">
+                    <li class="card" v-for="(completedTask, index) in completedTasks">
+                        <span>({{ index }}){{ completedTask }}</span>
+                        <button class="btn danger" @click="deleteTask(completedTasks, index)">Убрать</button>
                     </li>
                 </ul>
+                <p v-else>Нет выполненных заданий.</p>
             </section>
         </main>
     </div>
 </div>
 
 
-<script src="../node_modules/vue/dist/vue.global.js"></script>
-<!--TODO: connect script-->
+<script src="https://unpkg.com/vue@next"></script>
+<script src="../public/js/script.js"></script>
 </body>
 </html>
