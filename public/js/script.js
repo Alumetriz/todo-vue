@@ -42,6 +42,20 @@ const app = {
                 saveToLocalStorage('taskToDo', this.tasksToDo);
             }
         }
+    },
+    computed: {
+        titleClass() {
+            return {
+                'title': this.inputValue.length <= 10,
+                'warning': this.inputValue.length > 10
+            }
+        },
+        completedTasksCount() {
+            return this.completedTasks.length;
+        },
+        activeTasksCount() {
+            return this.tasksToDo.length;
+        }
     }
 }
 

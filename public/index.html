@@ -15,7 +15,13 @@
     <div class="wrapper">
         <header class="header">
             <div class="header__wrapper">
-                <h1 :class="{'title': inputValue.length <= 10, 'warning': inputValue.length > 10}">{{ title }}</h1>
+                <div class="header-title">
+                    <h1 :class="titleClass">{{ title }}</h1>
+                    <div class="stats">
+                        <span>Completed tasks: {{ completedTasksCount }}</span>
+                        <span>Tasks to do: {{ activeTasksCount }}</span>
+                    </div>
+                </div>
 
                 <form class="form">
                     <input type="text" :placeholder="placeHolder" v-model="inputValue">
@@ -27,7 +33,7 @@
         <main class="main">
             <section class="tasks__section">
                 <h1 class="task-title">{{ tasksToDoTitle }}</h1>
-                <ul class="tasks__list" v-if="tasksToDo.length !== 0">
+                <ul class="tasks__list" v-if="activeTasksCount !== 0">
                     <li class="card" v-for="(task, index) in tasksToDo">
                         <span class="task-info">({{ index }}){{ task }}</span>
                         <div>
@@ -44,7 +50,7 @@
 
             <section class="completed-tasks__section">
                 <h1 class="tasks-title">{{ completedTasksTitle }}</h1>
-                <ul class="completed-tasks__list" v-if="completedTasks.length != 0">
+                <ul class="completed-tasks__list" v-if="completedTasksCount !== 0">
                     <li class="card" v-for="(completedTask, index) in completedTasks">
                         <span>({{ index }}){{ completedTask }}</span>
                         <button class="btn danger" @click="deleteTask(completedTasks, index)">Убрать</button>

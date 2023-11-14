@@ -36,9 +36,11 @@ body {
   flex-direction: column;
   gap: 35px;
 }
+
 .warning {
   color: darkred;
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -84,11 +86,13 @@ body {
   color: #fff;
   border-color: #e53935;
 }
+
 .btn.blue {
   background: darkblue;
   color: #fff;
   border-color: darkblue;
 }
+
 .form {
   position: relative;
   margin-bottom: 0.5rem;
@@ -144,4 +148,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.header-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats {
+  display: flex;
+  gap: 15px;
 }
