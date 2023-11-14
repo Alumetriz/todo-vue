@@ -8,38 +8,35 @@ const app = {
             tasksToDoTitle: 'Tasks To-Do',
             completedTasksTitle: 'Completed Tasks',
             inputValue: '',
-            tasksToDo: loadFromLocalStorage('taskToDo'),
-            completedTasks: loadFromLocalStorage('completedTasks'),
             editingTaskIndex: -1,
+            tasks: loadFromLocalStorage('tasks') || [],
+            filterType: 'all',
         }
     },
     methods: {
         addTaskToDo(value) {
             if (this.inputValue.trim() === '') return;
-            this.tasksToDo.push(value);
+            this.tasks.push({id: this.tasksCount, value, completed: false});
             this.inputValue = '';
-            saveToLocalStorage('taskToDo', this.tasksToDo);
+            saveToLocalStorage('tasks', this.tasks);
         },
-        deleteTask(arr, index) {
-            arr.splice(index, 1);
-            saveToLocalStorage('completedTasks', this.completedTasks);
-            saveToLocalStorage('taskToDo', this.tasksToDo);
+        deleteTask(index) {
+            this.tasks.splice(index, 1);
+            saveToLocalStorage('tasks', this.tasks);
         },
-        completeTask(value, index) {
-            this.completedTasks.push(value);
-            saveToLocalStorage('completedTasks', this.completedTasks);
-            this.deleteTask(this.tasksToDo, index);
-            saveToLocalStorage('taskToDo', this.tasksToDo);
+        completeTask(index) {
+            this.tasks[index].completed = !this.tasks[index].completed;
+            saveToLocalStorage('tasks', this.tasks);
         },
         editTask(value, index) {
             if (this.editingTaskIndex !== index) {
                 this.inputValue = value;
                 this.editingTaskIndex = index;
             } else {
-                this.tasksToDo[this.editingTaskIndex] = this.inputValue;
+                this.tasks[this.editingTaskIndex].value = this.inputValue;
                 this.editingTaskIndex = -1;
                 this.inputValue = '';
-                saveToLocalStorage('taskToDo', this.tasksToDo);
+                saveToLocalStorage('tasks', this.tasks);
             }
         }
     },
@@ -50,11 +47,33 @@ const app = {
                 'warning': this.inputValue.length > 10
             }
         },
+        filteredTasks() {
+            if (this.filterType === 'completed') {
+                return this.tasks.filter((task) => task.completed);
+            } else if (this.filterType === 'uncompleted') {
+                return this.tasks.filter((task) => !task.completed);
+            } else {
+                return this.tasks;
+            }
+        },
+        taskTitleClass() {
+            return this.tasks.reduce((classes, task) => {
+                classes[task.id] = {
+                    'task-info': true,
+                    'completed': task.completed && this.filterType !== 'uncompleted',
+                    'not-completed': !task.completed && this.filterType !== 'completed'
+                };
+                return classes;
+            }, {});
+        },
+        tasksCount() {
+            return this.tasks.length;
+        },
         completedTasksCount() {
-            return this.completedTasks.length;
+            return this.tasks.filter((task) => task.completed).length;
         },
         activeTasksCount() {
-            return this.tasksToDo.length;
+            return this.tasks.filter((task) => !task.completed).length;
         }
     }
 }

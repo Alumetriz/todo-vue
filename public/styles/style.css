@@ -141,8 +141,7 @@ body {
   margin: 40px 0;
 }
 
-.tasks__list,
-.completed-tasks__list {
+.tasks__list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -188,4 +187,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   gap: 15px;
+}
+
+.task-info.completed {
+  color: #42b983;
 }

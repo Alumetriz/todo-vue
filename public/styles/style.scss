@@ -126,9 +126,7 @@ body {
   margin: 40px 0;
 }
 
-
-.tasks__list,
-.completed-tasks__list {
+.tasks__list {
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -158,4 +156,8 @@ body {
 .stats {
   display: flex;
   gap: 15px;
+}
+
+.task-info.completed {
+  color: #42b983;
 }

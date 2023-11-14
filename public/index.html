@@ -27,36 +27,36 @@
                     <input type="text" :placeholder="placeHolder" v-model="inputValue">
                     <button class="btn" type="submit" @click.prevent="addTaskToDo(inputValue)">Добавить</button>
                 </form>
+
+                <form action="">
+                    <input type="radio" id="all" value="all" v-model="filterType">
+                    <label for="all">All</label>
+                    <input type="radio" id="completed" value="completed" v-model="filterType">
+                    <label for="completed">Completed</label>
+                    <input type="radio" id="uncompleted" value="uncompleted" v-model="filterType">
+                    <label for="uncompleted">Uncompleted</label>
+                </form>
             </div>
         </header>
 
         <main class="main">
             <section class="tasks__section">
-                <h1 class="task-title">{{ tasksToDoTitle }}</h1>
-                <ul class="tasks__list" v-if="activeTasksCount !== 0">
-                    <li class="card" v-for="(task, index) in tasksToDo">
-                        <span class="task-info">({{ index }}){{ task }}</span>
+                <h1 class="tasks-title">{{ tasksToDoTitle }}</h1>
+                <ul class="tasks__list" v-if="tasksCount !== 0">
+                    <li class="card" v-for="(task, index) in filteredTasks">
+                        <span :class="taskTitleClass[task.id]">({{ index }}){{ task.value }}</span>
                         <div>
-                            <button class="btn danger" @click="deleteTask(tasksToDo, index)">Удалить</button>
-                            <button class="btn primary" @click="completeTask(task, index)">Выполнить</button>
-                            <button class="btn blue" @click="editTask(task, index)">
+                            <button class="btn danger" @click="deleteTask(tasks, index)">Удалить</button>
+                            <button class="btn primary" @click="completeTask(index)">
+                                {{ task.completed ? 'Убрать' : 'Выполнить' }}
+                            </button>
+                            <button class="btn blue" @click="editTask(task.value, index)">
                                 {{ editingTaskIndex === index ? 'Применить' : 'Редактировать' }}
                             </button>
                         </div>
                     </li>
                 </ul>
                 <p v-else>Нет активных заданий.</p>
-            </section>
-
-            <section class="completed-tasks__section">
-                <h1 class="tasks-title">{{ completedTasksTitle }}</h1>
-                <ul class="completed-tasks__list" v-if="completedTasksCount !== 0">
-                    <li class="card" v-for="(completedTask, index) in completedTasks">
-                        <span>({{ index }}){{ completedTask }}</span>
-                        <button class="btn danger" @click="deleteTask(completedTasks, index)">Убрать</button>
-                    </li>
-                </ul>
-                <p v-else>Нет выполненных заданий.</p>
             </section>
         </main>
     </div>
